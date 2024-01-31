@@ -24,13 +24,13 @@ public class DashboardForm extends JFrame{
 
     }
 
-    public static void main(String[] args) {
-        DashboardForm dashboardForm = new DashboardForm();
-        dashboardForm.setVisible(true);
-    }
+//    public static void main(String[] args) {
+//        DashboardForm dashboardForm = new DashboardForm();
+//        dashboardForm.setVisible(true);
+//    }
     // Tworzenie modelu dla JTable
     DefaultTableModel tableModel;
-    public DashboardForm(User loggedInUser) {
+    public DashboardForm(User loggedInUser, JFrame parent) {
         super("DashboardForm");
         this.loggedInUser = loggedInUser;
         setContentPane(dashboardPanel);
@@ -83,13 +83,16 @@ public class DashboardForm extends JFrame{
         btnClose.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                dispose();
                 LoginForm loginForm = new LoginForm(null);
             }
         });
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                dispose();
+                DodajProjektForm dodajProjektForm = new DodajProjektForm(loggedInUser); // Otwórz nowy formularz "DodajProjektForm"
+                dodajProjektForm.setVisible(true);
             }
         });
         btnEdit.addActionListener(new ActionListener() {

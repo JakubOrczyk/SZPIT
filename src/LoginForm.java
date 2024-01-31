@@ -11,9 +11,11 @@ public class LoginForm extends JDialog  {
     private JTextField tfLogin;
     private JPasswordField pfPassword;
     private JButton btnCancel;
+    private JFrame parentFrame;
 
     public LoginForm(JFrame parent) {
         super(parent);
+        this.parentFrame = parent;
         setTitle("Create a new account");
         setContentPane(LoginPanel);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -34,8 +36,9 @@ public class LoginForm extends JDialog  {
 
                 if(user != null ) {
                     dispose();
-                    DashboardForm dashboardForm = new DashboardForm(user);
+                    DashboardForm dashboardForm = new DashboardForm(user, parentFrame);
                     dashboardForm.setVisible(true);
+
                 }
                 else {
                     JOptionPane.showMessageDialog(LoginPanel,
@@ -48,6 +51,17 @@ public class LoginForm extends JDialog  {
         btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                dispose();
+            }
+        });
+
+        btnRegistration.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                RegistrationForm registrationForm = new RegistrationForm(parentFrame);
+                registrationForm.setVisible(true);
                 dispose();
             }
         });
