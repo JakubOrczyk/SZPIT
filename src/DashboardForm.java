@@ -18,6 +18,8 @@ public class DashboardForm extends JFrame{
     private JButton btnClear;
     private JTable ClientsTable;
     private JButton btnClose;
+    private JButton btnZespoly;
+    private JButton btnProg;
     private User loggedInUser;
 
     public DashboardForm() {
