@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
 public class DodajProjektForm extends JDialog {
     private JPanel AddProjektPanel;
@@ -18,9 +19,11 @@ public class DodajProjektForm extends JDialog {
     private JButton btnBack;
     private JButton btnAdd;
     private User loggedInUser;
+    private List<Projekt> projects;
 
-    public DodajProjektForm(User loggedInUser) {
+    public DodajProjektForm(User loggedInUser, java.util.List<Projekt> projects) {
         this.loggedInUser = loggedInUser;
+        this.projects = projects;
         setTitle("Create a new account");
         setContentPane(AddProjektPanel);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -75,7 +78,12 @@ public class DodajProjektForm extends JDialog {
                     int rowsInserted = preparedStatement.executeUpdate();
                     if (rowsInserted > 0) {
                         JOptionPane.showMessageDialog(DodajProjektForm.this, "Projekt został pomyślnie dodany.", "Sukces", JOptionPane.INFORMATION_MESSAGE);
+                        // Stwórz obiekt projektu na podstawie wprowadzonych danych
+                        Projekt nowyProjekt = new Projekt(name, opis, dataRozpoczecia, dataZakonczenia);
+                        nowyProjekt.setStatus(status);
 
+                        // Dodaj nowy projekt do listy projects
+                        projects.add(nowyProjekt);
                     } else {
                         JOptionPane.showMessageDialog(DodajProjektForm.this, "Nie udało się dodać projektu.", "Błąd", JOptionPane.ERROR_MESSAGE);
                     }
@@ -83,6 +91,7 @@ public class DodajProjektForm extends JDialog {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(DodajProjektForm.this, "Wystąpił błąd podczas dodawania projektu.", "Błąd", JOptionPane.ERROR_MESSAGE);
                 }
+
             }
         });
     }

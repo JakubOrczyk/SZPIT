@@ -140,4 +140,13 @@ public class Projekt {
     public void setZespol(Zespol zespol) {
         this.zespol = zespol;
     }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    // Metoda zwracająca status projektu
+    public String getStatus() {
+        return status;
+    }
 }

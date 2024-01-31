@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -22,9 +24,7 @@ public class DashboardForm extends JFrame{
     private JButton btnProg;
     private User loggedInUser;
 
-    public DashboardForm() {
-
-    }
+    List<Projekt> projects = new ArrayList<Projekt>();
 
 //    public static void main(String[] args) {
 //        DashboardForm dashboardForm = new DashboardForm();
@@ -68,8 +68,14 @@ public class DashboardForm extends JFrame{
                 String description = resultSet.getString("Opis");
                 String status = resultSet.getString("Status");
 
+                // Tworzenie obiektu klasy Projekt
+                Projekt projekt = new Projekt(name, description, null, null);
+                projekt.setStatus(status);
+
+                projects.add(projekt);
+
                 // Dodanie danych do modelu
-                tableModel.addRow(new Object[]{projectID, name, description, status});
+                tableModel.addRow(new Object[]{projectID, projekt.getNazwa(), projekt.getOpis(), projekt.getStatus()});
             }
 
             resultSet.close();
@@ -93,14 +99,41 @@ public class DashboardForm extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                DodajProjektForm dodajProjektForm = new DodajProjektForm(loggedInUser); // Otwórz nowy formularz "DodajProjektForm"
+                DodajProjektForm dodajProjektForm = new DodajProjektForm(loggedInUser, projects); // Otwórz nowy formularz "DodajProjektForm"
                 dodajProjektForm.setVisible(true);
             }
         });
         btnEdit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+// Sprawdź, czy wybrano wiersz w tabeli
+                int selectedRow = ClientsTable.getSelectedRow();
+                if (selectedRow == -1) {
+                    JOptionPane.showMessageDialog(null, "Wybierz projekt do edycji.", "Błąd", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
+                // Pobierz nazwę i opis wybranego projektu z tabeli
+                String projectName = (String) ClientsTable.getValueAt(selectedRow, 1);
+                String projectDescription = (String) ClientsTable.getValueAt(selectedRow, 2);
+
+                // Znajdź wybrany projekt w liście projects na podstawie nazwy i opisu
+                Projekt selectedProject = null;
+                for (Projekt project : projects) {
+                    if (project.getNazwa().equals(projectName) && project.getOpis().equals(projectDescription)) {
+                        selectedProject = project;
+                        break;
+                    }
+                }
+
+                if (selectedProject == null) {
+                    JOptionPane.showMessageDialog(null, "Nie można znaleźć wybranego projektu.", "Błąd", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // Otwórz formularz edycji projektu i przekaż wybrany projekt jako argument konstruktora
+                EditProjektForm editProjektForm = new EditProjektForm(selectedProject);
+                editProjektForm.setVisible(true);
             }
         });
         btnDelete.addActionListener(new ActionListener() {
@@ -130,6 +163,7 @@ public class DashboardForm extends JFrame{
                         // Usunięto projekt z bazy danych, więc usuń także wiersz z tabeli
                         tableModel.removeRow(selectedRow);
                         JOptionPane.showMessageDialog(null, "Projekt został pomyślnie usunięty.", "Sukces", JOptionPane.INFORMATION_MESSAGE);
+
                     } else {
                         JOptionPane.showMessageDialog(null, "Nie udało się usunąć projektu.", "Błąd", JOptionPane.ERROR_MESSAGE);
                     }
@@ -144,6 +178,20 @@ public class DashboardForm extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
 
+            }
+        });
+        btnZespoly.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        btnProg.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                ProgramisciForm programisciForm = new ProgramisciForm(); // Otwórz nowy formularz "DodajProjektForm"
+                programisciForm.setVisible(true);
             }
         });
     }
