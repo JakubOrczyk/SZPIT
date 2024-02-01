@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="PodgladProjektuForm">
   <grid id="27dc6" binding="podgladProjektuPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-    <margin top="0" left="0" bottom="0" right="0"/>
+    <margin top="20" left="20" bottom="20" right="20"/>
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-15572848"/>
+    </properties>
     <border type="none"/>
     <children>
       <grid id="7ab9f" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -13,7 +15,9 @@
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-15572848"/>
+        </properties>
         <border type="none"/>
         <children>
           <grid id="d448b" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -21,7 +25,9 @@
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties/>
+            <properties>
+              <background color="-15572848"/>
+            </properties>
             <border type="none"/>
             <children>
               <component id="efa00" class="javax.swing.JLabel">
@@ -29,6 +35,8 @@
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <font name="Apple SD Gothic Neo" size="18" style="1"/>
+                  <foreground color="-1"/>
                   <text value="Dane Projektu"/>
                 </properties>
               </component>
@@ -44,12 +52,18 @@
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <background color="-15572848"/>
+                    </properties>
                     <border type="none"/>
                     <children>
                       <component id="c47ee" class="javax.swing.JTable" binding="projektTable">
                         <constraints/>
-                        <properties/>
+                        <properties>
+                          <background color="-14119750"/>
+                          <fillsViewportHeight value="true"/>
+                          <foreground color="-1"/>
+                        </properties>
                       </component>
                     </children>
                   </scrollpane>
@@ -57,29 +71,23 @@
               </grid>
             </children>
           </grid>
-          <grid id="9d7ce" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="9d7ce" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties/>
+            <properties>
+              <background color="-15572848"/>
+            </properties>
             <border type="none"/>
             <children>
               <component id="cd061" class="javax.swing.JButton" binding="btnBack">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <font name="Apple SD Gothic Neo"/>
                   <text value="Wróć"/>
-                </properties>
-              </component>
-              <component id="e0b6e" class="javax.swing.JButton" binding="btnKlient">
-                <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <label value="Dodaj Klienta"/>
-                  <text value="Dodaj Klienta"/>
                 </properties>
               </component>
             </children>
@@ -89,7 +97,9 @@
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties/>
+            <properties>
+              <background color="-15572848"/>
+            </properties>
             <border type="none"/>
             <children>
               <component id="abe25" class="javax.swing.JLabel">
@@ -97,6 +107,8 @@
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <font name="Apple SD Gothic Neo" size="18" style="1"/>
+                  <foreground color="-1"/>
                   <text value="Zespół"/>
                 </properties>
               </component>
@@ -104,12 +116,18 @@
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
-                <properties/>
+                <properties>
+                  <background color="-15572848"/>
+                </properties>
                 <border type="none"/>
                 <children>
                   <component id="22745" class="javax.swing.JTable" binding="zespolTable">
                     <constraints/>
-                    <properties/>
+                    <properties>
+                      <background color="-14119750"/>
+                      <fillsViewportHeight value="true"/>
+                      <foreground color="-1"/>
+                    </properties>
                   </component>
                 </children>
               </scrollpane>
@@ -120,7 +138,9 @@
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties/>
+            <properties>
+              <background color="-15572848"/>
+            </properties>
             <border type="none"/>
             <children>
               <component id="b7be3" class="javax.swing.JLabel">
@@ -128,6 +148,8 @@
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <font name="Apple SD Gothic Neo" size="18" style="1"/>
+                  <foreground color="-1"/>
                   <text value="Programisci"/>
                 </properties>
               </component>
@@ -135,12 +157,18 @@
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
-                <properties/>
+                <properties>
+                  <background color="-15572848"/>
+                </properties>
                 <border type="none"/>
                 <children>
                   <component id="d4100" class="javax.swing.JTable" binding="ProgramistaTable">
                     <constraints/>
-                    <properties/>
+                    <properties>
+                      <background color="-14119750"/>
+                      <fillsViewportHeight value="true"/>
+                      <foreground color="-1"/>
+                    </properties>
                   </component>
                 </children>
               </scrollpane>

@@ -26,19 +26,17 @@ public class DashboardForm extends JFrame{
 
     List<Projekt> projects = new ArrayList<Projekt>();
 
-//    public static void main(String[] args) {
-//        DashboardForm dashboardForm = new DashboardForm();
-//        dashboardForm.setVisible(true);
-//    }
-    // Tworzenie modelu dla JTable
+    private JFrame parentFrame;
     DefaultTableModel tableModel;
     public DashboardForm(User loggedInUser, JFrame parent) {
-        super("DashboardForm");
+        super("System zarządzania projektami IT");
         this.loggedInUser = loggedInUser;
+        this.parentFrame = parent;
         setContentPane(dashboardPanel);
         int width = 800, height = 600;
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setMinimumSize(new Dimension(width,height));
+        setLocationRelativeTo(parent);
 
 // Inicjalizacja JTable z pustym modelem
         tableModel = new DefaultTableModel();
@@ -101,7 +99,7 @@ public class DashboardForm extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                DodajProjektForm dodajProjektForm = new DodajProjektForm(loggedInUser, projects); // Otwórz nowy formularz "DodajProjektForm"
+                DodajProjektForm dodajProjektForm = new DodajProjektForm(loggedInUser, projects, parentFrame); // Otwórz nowy formularz "DodajProjektForm"
                 dodajProjektForm.setVisible(true);
             }
         });
@@ -135,7 +133,7 @@ public class DashboardForm extends JFrame{
 
                 // Otwórz formularz edycji projektu i przekaż wybrany projekt jako argument konstruktora
                 dispose();
-                EditProjektForm editProjektForm = new EditProjektForm(selectedProject, loggedInUser);
+                EditProjektForm editProjektForm = new EditProjektForm(selectedProject, loggedInUser,parentFrame);
                 editProjektForm.setVisible(true);
             }
         });
@@ -207,7 +205,7 @@ public class DashboardForm extends JFrame{
 
                 // Otwórz formularz edycji projektu i przekaż wybrany projekt jako argument konstruktora
                 dispose();
-                PodgladProjektuForm podgladProjektuForm = new PodgladProjektuForm(selectedProject, loggedInUser);
+                PodgladProjektuForm podgladProjektuForm = new PodgladProjektuForm(selectedProject, loggedInUser, parentFrame);
                 podgladProjektuForm.setVisible(true);
             }
         });
@@ -215,7 +213,7 @@ public class DashboardForm extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                AddZespolyForm addZespolyForm = new AddZespolyForm(loggedInUser); // Otwórz nowy formularz "DodajProjektForm"
+                AddZespolyForm addZespolyForm = new AddZespolyForm(loggedInUser, parentFrame); // Otwórz nowy formularz "DodajProjektForm"
                 addZespolyForm.setVisible(true);
             }
         });
@@ -223,7 +221,7 @@ public class DashboardForm extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                ProgramisciForm programisciForm = new ProgramisciForm(loggedInUser); // Otwórz nowy formularz "DodajProjektForm"
+                ProgramisciForm programisciForm = new ProgramisciForm(loggedInUser, parentFrame); // Otwórz nowy formularz "DodajProjektForm"
                 programisciForm.setVisible(true);
             }
         });

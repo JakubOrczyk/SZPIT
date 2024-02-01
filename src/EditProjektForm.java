@@ -21,13 +21,17 @@ public class EditProjektForm extends JFrame{
     private JSpinner spDataZak;
     private JButton btnBack;
     private User loggedInUser;
+    private JFrame parentFrame;
 
-    public EditProjektForm(Projekt selectedProject, User loggedInUser) {
+    public EditProjektForm(Projekt selectedProject, User loggedInUser, JFrame parent) {
         this.loggedInUser = loggedInUser;
+        this.parentFrame = parent;
+        setTitle("System zarządzania projektami IT - Edytuj Projekt");
         setContentPane(EditPanel);
-        int width = 800, height = 600;
+        int width = 900, height = 400;
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setMinimumSize(new Dimension(width,height));
+        setLocationRelativeTo(parent);
 
         spDataRoz.setModel(new SpinnerDateModel());
         spDataZak.setModel(new SpinnerDateModel());
@@ -50,14 +54,16 @@ public class EditProjektForm extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                AddZespolProjektForm addZespolProjektForm = new AddZespolProjektForm(selectedProject, loggedInUser);
+                AddZespolProjektForm addZespolProjektForm = new AddZespolProjektForm(selectedProject, loggedInUser, parentFrame);
                 addZespolProjektForm.setVisible(true);
             }
         });
         dodajKlientaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                dispose();
+                AddKlientForm addKlientForm = new AddKlientForm(selectedProject, loggedInUser, parentFrame);
+                addKlientForm.setVisible(true);
             }
         });
         btnEdit.addActionListener(new ActionListener() {
@@ -101,7 +107,7 @@ public class EditProjektForm extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                DashboardForm dashboardForm = new DashboardForm(loggedInUser, null);
+                DashboardForm dashboardForm = new DashboardForm(loggedInUser, parentFrame);
                 dashboardForm.setVisible(true);
             }
         });

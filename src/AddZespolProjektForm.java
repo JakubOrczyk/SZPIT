@@ -17,15 +17,18 @@ public class AddZespolProjektForm extends JDialog{
 
     private List<Zespol> zespoly = new ArrayList<>();
     DefaultTableModel tableModel;
+    private JFrame parentFrame;
     private User loggedInUser;
-    public AddZespolProjektForm(Projekt selectedProject, User loggedInUser) {
+    public AddZespolProjektForm(Projekt selectedProject, User loggedInUser, JFrame parent) {
+        this.parentFrame = parent;
         this.loggedInUser = loggedInUser;
-        setTitle("Create a new account");
+        setTitle("System zarządzania projektami IT - Dodaj zespół");
         setContentPane(AddZespulProjektPanel);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         int width = 800, height = 600;
         setMinimumSize(new Dimension(width, height));
         setModal(true);
+        setLocationRelativeTo(parent);
 
         // Inicjalizacja JTable z pustym modelem
         tableModel = new DefaultTableModel();
@@ -34,7 +37,7 @@ public class AddZespolProjektForm extends JDialog{
         // Dodanie kolumn do modelu
         tableModel.addColumn("ID");
         tableModel.addColumn("Nazwa");
-        tableModel.addColumn("ImieLidera");
+        tableModel.addColumn("Rodzaj");
         tableModel.addColumn("ilośćProgramistów");
 
         final String DB_URL = "jdbc:mysql://localhost/SZPIT?serverTimezone=UTC";
@@ -42,7 +45,7 @@ public class AddZespolProjektForm extends JDialog{
         final String PASSWORD = "";
 
         try (Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD)) {
-            String sql = "SELECT * FROM Zespol";
+            String sql = "SELECT * FROM Zespol WHERE UserID = " + loggedInUser.getUserID();
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -65,7 +68,7 @@ public class AddZespolProjektForm extends JDialog{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                EditProjektForm editProjektForm = new EditProjektForm(selectedProject, loggedInUser);
+                EditProjektForm editProjektForm = new EditProjektForm(selectedProject, loggedInUser, parentFrame);
                 editProjektForm.setVisible(true);
             }
         });
@@ -73,9 +76,32 @@ public class AddZespolProjektForm extends JDialog{
         przypiszZespulButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int selectedRow = zespulTable.getSelectedRow();
+                if (selectedRow != -1) {
+                    int selectedZespolID = (int) tableModel.getValueAt(selectedRow, 0);
+                    try (Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD)) {
+                        String updateQuery = "UPDATE Projekt SET ZespolID = ? WHERE UserID = ? AND ProjektID = ?";
+                        PreparedStatement preparedStatement = conn.prepareStatement(updateQuery);
+                        preparedStatement.setInt(1, selectedZespolID);
+                        preparedStatement.setInt(2, loggedInUser.getUserID());
+                        preparedStatement.setInt(3, selectedProject.getProjectID());
+                        int rowsAffected = preparedStatement.executeUpdate();
+                        if (rowsAffected > 0) {
+                            JOptionPane.showMessageDialog(AddZespolProjektForm.this, "Zespół został przypisany do projektu.", "Sukces", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(AddZespolProjektForm.this, "Nie udało się przypisać zespołu do projektu.", "Błąd", JOptionPane.ERROR_MESSAGE);
+                        }
 
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(AddZespolProjektForm.this, "Wystąpił błąd podczas przypisywania zespołu do projektu.", "Błąd", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(AddZespolProjektForm.this, "Proszę wybrać zespół.", "Błąd", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
+
 
 
     }

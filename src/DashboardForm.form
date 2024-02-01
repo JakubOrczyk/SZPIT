@@ -1,40 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="DashboardForm">
-  <grid id="27dc6" binding="dashboardPanel" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="dashboardPanel" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="689" height="400"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-15572848"/>
+    </properties>
     <border type="none"/>
     <children>
-      <grid id="90fca" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="90fca" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <background color="-10947221"/>
+          <background color="-15572848"/>
           <enabled value="true"/>
           <foreground color="-16777216"/>
         </properties>
         <border type="none"/>
         <children>
-          <component id="b48b5" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value=""/>
-            </properties>
-          </component>
           <component id="cb735" class="javax.swing.JLabel" binding="IbAdmin">
             <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <foreground color="-16777216"/>
-              <text value="Label"/>
+              <font name="Apple SD Gothic Neo" size="20" style="1"/>
+              <foreground color="-1"/>
+              <text value="Projekty"/>
             </properties>
           </component>
         </children>
@@ -42,9 +37,11 @@
       <grid id="cf1ba" layout-manager="GridLayoutManager" row-count="1" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-15572848"/>
+        </properties>
         <border type="none"/>
         <children>
           <component id="89e68" class="javax.swing.JButton" binding="btnAdd">
@@ -52,6 +49,8 @@
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-15572848"/>
+              <font name="Apple SD Gothic Neo"/>
               <text value="Dodaj Projekt"/>
             </properties>
           </component>
@@ -60,6 +59,8 @@
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-15572848"/>
+              <font name="Apple SD Gothic Neo"/>
               <text value="Edytuj Projekt"/>
             </properties>
           </component>
@@ -68,6 +69,8 @@
               <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-15572848"/>
+              <font name="Apple SD Gothic Neo"/>
               <text value="Usuń Projekt"/>
             </properties>
           </component>
@@ -76,6 +79,8 @@
               <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-15572848"/>
+              <font name="Apple SD Gothic Neo"/>
               <text value="Podgląd Projektu"/>
             </properties>
           </component>
@@ -91,41 +96,61 @@
           </hspacer>
         </children>
       </grid>
-      <grid id="41b7c" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="41b7c" layout-manager="GridLayoutManager" row-count="4" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-15572848"/>
+        </properties>
         <border type="none"/>
         <children>
           <scrollpane id="a0c27">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties/>
+            <properties>
+              <autoscrolls value="false"/>
+              <background color="-14119750"/>
+              <inheritsPopupMenu value="true"/>
+            </properties>
             <border type="none"/>
             <children>
               <component id="df62b" class="javax.swing.JTable" binding="ClientsTable">
                 <constraints/>
-                <properties/>
+                <properties>
+                  <autoResizeMode value="2"/>
+                  <background color="-14119750"/>
+                  <doubleBuffered value="false"/>
+                  <dragEnabled value="false"/>
+                  <fillsViewportHeight value="true"/>
+                  <foreground color="-1"/>
+                  <gridColor color="-15572848"/>
+                  <inheritsPopupMenu value="true"/>
+                  <selectionForeground color="-15572848"/>
+                </properties>
               </component>
             </children>
           </scrollpane>
           <component id="5523f" class="javax.swing.JButton" binding="btnClose">
             <constraints>
-              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Close"/>
+              <background color="-15572848"/>
+              <font name="Apple SD Gothic Neo"/>
+              <text value="Zamknij"/>
             </properties>
           </component>
           <grid id="d1fb8" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties/>
+            <properties>
+              <background color="-15572848"/>
+            </properties>
             <border type="none"/>
             <children>
               <component id="cbfb0" class="javax.swing.JButton" binding="btnZespoly">
@@ -133,6 +158,8 @@
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-15572848"/>
+                  <font name="Apple SD Gothic Neo"/>
                   <text value="Zespoły"/>
                 </properties>
               </component>
@@ -141,13 +168,35 @@
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-15572848"/>
+                  <font name="Apple SD Gothic Neo"/>
                   <text value="Programisci"/>
                 </properties>
               </component>
             </children>
           </grid>
+          <vspacer id="fc293">
+            <constraints>
+              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </vspacer>
+          <vspacer id="491ca">
+            <constraints>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </vspacer>
         </children>
       </grid>
+      <vspacer id="b1228">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <vspacer id="f8f04">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
     </children>
   </grid>
 </form>

@@ -20,16 +20,19 @@ public class DodajProjektForm extends JDialog {
     private JButton btnAdd;
     private User loggedInUser;
     private List<Projekt> projects;
+    private JFrame parentFrame;
 
-    public DodajProjektForm(User loggedInUser, java.util.List<Projekt> projects) {
+    public DodajProjektForm(User loggedInUser, java.util.List<Projekt> projects, JFrame parent) {
         this.loggedInUser = loggedInUser;
+        this.parentFrame = parent;
         this.projects = projects;
-        setTitle("Create a new account");
+        setTitle("System zarządzania projektami IT - Dodaj Projekt");
         setContentPane(AddProjektPanel);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        int width = 800, height = 600;
+        int width = 800, height = 400;
         setMinimumSize(new Dimension(width, height));
         setModal(true);
+        setLocationRelativeTo(parent);
 
 
         spDataRoz.setModel(new SpinnerDateModel());
@@ -38,7 +41,7 @@ public class DodajProjektForm extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                DashboardForm dashboardForm = new DashboardForm(loggedInUser, null);
+                DashboardForm dashboardForm = new DashboardForm(loggedInUser, parentFrame);
                 dashboardForm.setVisible(true);
             }
         });

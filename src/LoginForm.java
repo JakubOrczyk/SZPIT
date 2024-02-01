@@ -16,7 +16,7 @@ public class LoginForm extends JDialog  {
     public LoginForm(JFrame parent) {
         super(parent);
         this.parentFrame = parent;
-        setTitle("Create a new account");
+        setTitle("Log in to your account");
         setContentPane(LoginPanel);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         int width = 450, height = 475;
@@ -42,7 +42,7 @@ public class LoginForm extends JDialog  {
                 }
                 else {
                     JOptionPane.showMessageDialog(LoginPanel,
-                            "Failed to register new user",
+                            "Błąd podczas logowania użytkownika!",
                             "Try again",
                             JOptionPane.ERROR_MESSAGE);
                 }
@@ -65,7 +65,7 @@ public class LoginForm extends JDialog  {
 
             }
         });
-        setVisible(true);
+
     }
     public User user;
     private User getAutenticateUser(String email, String password) {
@@ -101,19 +101,19 @@ public class LoginForm extends JDialog  {
         return user;
     }
 
-    public static void main(String[] args) {
-        LoginForm loginForm = new LoginForm(null);
-        User user = loginForm.user;
-
-        if(user != null){
-            System.out.println("Successful  Authentication of "+ user.getName());
-            System.out.println("\t\tEmail: "+ user.getEmail());
-            System.out.println("\t\tPhone: "+ user.getPhone());
-            System.out.println("\t\tAddress: "+ user.getAddress());
-        }else{
-            System.out.println("Authentication canceled");
-        }
-
-    }
+//    public static void main(String[] args) {
+//        LoginForm loginForm = new LoginForm(null);
+//        User user = loginForm.user;
+//
+//        if(user != null){
+//            System.out.println("Successful  Authentication of "+ user.getName());
+//            System.out.println("\t\tEmail: "+ user.getEmail());
+//            System.out.println("\t\tPhone: "+ user.getPhone());
+//            System.out.println("\t\tAddress: "+ user.getAddress());
+//        }else{
+//            System.out.println("Authentication canceled");
+//        }
+//
+//    }
 
 }

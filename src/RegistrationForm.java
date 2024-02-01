@@ -51,6 +51,22 @@ public RegistrationForm(JFrame parent) {
                         JOptionPane.ERROR_MESSAGE);
                 return;
             }
+// Walidacja adresu e-mail
+            if (!isValidEmail(email)) {
+                JOptionPane.showMessageDialog(RegistrationPanel,
+                        "Niepoprawny adres e-mail!",
+                        "Błąd",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            // Walidacja hasła
+            if (!isValidPassword(password)) {
+                JOptionPane.showMessageDialog(RegistrationPanel,
+                        "Niepoprawne hasło!\n Hasło musi zawierać:\n 1 dużą literę,\n 1 cyfrę,\n 1 znak specjalny,\n i mieć długość co najmniej 6 znaków.",
+                        "Błąd",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
             if (registerUser(name, login, email, password)) {
                 JOptionPane.showMessageDialog(RegistrationPanel,
@@ -68,6 +84,20 @@ public RegistrationForm(JFrame parent) {
                         "Błąd",
                         JOptionPane.ERROR_MESSAGE);
             }
+        }
+        private boolean isValidEmail(String email) {
+            // Wzorzec do sprawdzania adresu e-mail
+            String emailPattern = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+
+            // Sprawdzenie, czy adres e-mail pasuje do wzorca
+            return email.matches(emailPattern);
+        }
+        private boolean isValidPassword(String password) {
+            // Wzorzec do sprawdzania hasła
+            String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$";
+
+            // Sprawdzenie, czy hasło pasuje do wzorca
+            return password.matches(passwordPattern);
         }
     });
 }
