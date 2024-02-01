@@ -17,7 +17,7 @@ public class DashboardForm extends JFrame{
     private JButton btnAdd;
     private JButton btnEdit;
     private JButton btnDelete;
-    private JButton btnClear;
+    private JButton btnPodglad;
     private JTable ClientsTable;
     private JButton btnClose;
     private JButton btnZespoly;
@@ -67,9 +67,11 @@ public class DashboardForm extends JFrame{
                 String name = resultSet.getString("Nazwa");
                 String description = resultSet.getString("Opis");
                 String status = resultSet.getString("Status");
+                Date dataR = resultSet.getDate("DataRozpoczecia");
+                Date dataZ = resultSet.getDate("DataZakonczenia");
 
                 // Tworzenie obiektu klasy Projekt
-                Projekt projekt = new Projekt(name, description, null, null);
+                Projekt projekt = new Projekt(name, description, dataR, dataZ);
                 projekt.setStatus(status);
 
                 projects.add(projekt);
@@ -106,13 +108,13 @@ public class DashboardForm extends JFrame{
         btnEdit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-// Sprawdź, czy wybrano wiersz w tabeli
+                // Sprawdź, czy wybrano wiersz w tabeli
                 int selectedRow = ClientsTable.getSelectedRow();
                 if (selectedRow == -1) {
                     JOptionPane.showMessageDialog(null, "Wybierz projekt do edycji.", "Błąd", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-
+                int projectID = (int) ClientsTable.getValueAt(selectedRow, 0);
                 // Pobierz nazwę i opis wybranego projektu z tabeli
                 String projectName = (String) ClientsTable.getValueAt(selectedRow, 1);
                 String projectDescription = (String) ClientsTable.getValueAt(selectedRow, 2);
@@ -125,14 +127,15 @@ public class DashboardForm extends JFrame{
                         break;
                     }
                 }
-
+                selectedProject.setID(projectID);
                 if (selectedProject == null) {
                     JOptionPane.showMessageDialog(null, "Nie można znaleźć wybranego projektu.", "Błąd", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
                 // Otwórz formularz edycji projektu i przekaż wybrany projekt jako argument konstruktora
-                EditProjektForm editProjektForm = new EditProjektForm(selectedProject);
+                dispose();
+                EditProjektForm editProjektForm = new EditProjektForm(selectedProject, loggedInUser);
                 editProjektForm.setVisible(true);
             }
         });
@@ -174,23 +177,53 @@ public class DashboardForm extends JFrame{
             }
         });
 
-        btnClear.addActionListener(new ActionListener() {
+        btnPodglad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Sprawdź, czy wybrano wiersz w tabeli
+                int selectedRow = ClientsTable.getSelectedRow();
+                if (selectedRow == -1) {
+                    JOptionPane.showMessageDialog(null, "Wybierz projekt do podglądu.", "Błąd", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int projectID = (int) ClientsTable.getValueAt(selectedRow, 0);
+                // Pobierz nazwę i opis wybranego projektu z tabeli
+                String projectName = (String) ClientsTable.getValueAt(selectedRow, 1);
+                String projectDescription = (String) ClientsTable.getValueAt(selectedRow, 2);
 
+                // Znajdź wybrany projekt w liście projects na podstawie nazwy i opisu
+                Projekt selectedProject = null;
+                for (Projekt project : projects) {
+                    if (project.getNazwa().equals(projectName) && project.getOpis().equals(projectDescription)) {
+                        selectedProject = project;
+                        break;
+                    }
+                }
+                selectedProject.setID(projectID);
+                if (selectedProject == null) {
+                    JOptionPane.showMessageDialog(null, "Nie można znaleźć wybranego projektu.", "Błąd", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // Otwórz formularz edycji projektu i przekaż wybrany projekt jako argument konstruktora
+                dispose();
+                PodgladProjektuForm podgladProjektuForm = new PodgladProjektuForm(selectedProject, loggedInUser);
+                podgladProjektuForm.setVisible(true);
             }
         });
         btnZespoly.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                dispose();
+                AddZespolyForm addZespolyForm = new AddZespolyForm(loggedInUser); // Otwórz nowy formularz "DodajProjektForm"
+                addZespolyForm.setVisible(true);
             }
         });
         btnProg.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                ProgramisciForm programisciForm = new ProgramisciForm(); // Otwórz nowy formularz "DodajProjektForm"
+                ProgramisciForm programisciForm = new ProgramisciForm(loggedInUser); // Otwórz nowy formularz "DodajProjektForm"
                 programisciForm.setVisible(true);
             }
         });

@@ -18,8 +18,9 @@ public class ProgramisciForm extends JFrame{
     private JButton btnDelete;
     private JButton btnBack;
     DefaultTableModel tableModel;
-public ProgramisciForm() {
-    super();
+    private User loggedInUser;
+public ProgramisciForm(User loggedInUser) {
+    this.loggedInUser = loggedInUser;
     setContentPane(ProgramistaPanel);
     int width = 1200, height = 600;
     setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -74,6 +75,9 @@ public ProgramisciForm() {
     btnBack.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
+            dispose();
+            DashboardForm dashboardForm = new DashboardForm(loggedInUser, null);
+            dashboardForm.setVisible(true);
 
         }
     });
@@ -90,7 +94,7 @@ public ProgramisciForm() {
             Programista newProgramista = new Programista(name, surname, email, phone, address, jezyk, 0);
 
             try (Connection connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD)) {
-                String insertQuery = "INSERT INTO Programista (Name, Surname, Email, Skills, Phone, Address) VALUES (?, ?, ?, ?, ?, ?)";
+                String insertQuery = "INSERT INTO Programista (Name, Surname, Email, Skills, Phone, Address, IDzespolu) VALUES (?, ?, ?, ?, ?, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
                 preparedStatement.setString(1, name);
                 preparedStatement.setString(2, surname);
@@ -99,11 +103,18 @@ public ProgramisciForm() {
                 preparedStatement.setString(5, phone);
                 preparedStatement.setString(6, address);
 
+
                 int rowsInserted = preparedStatement.executeUpdate();
                 if (rowsInserted > 0) {
                     JOptionPane.showMessageDialog(ProgramistaPanel, "Programista został pomyślnie dodany do bazy danych.");
                     // Aktualizacja widoku tabeli
-                    tableModel.addRow(new Object[]{getLastProgramistaID(connection), name, surname, email});
+                    tableModel.addRow(new Object[]{getLastProgramistaID(connection), name, surname, email,jezyk,phone,address});
+                    tfName.setText("");
+                    tfSurname.setText("");
+                    tfEmail.setText("");
+                    tfJezyk.setText("");
+                    tfPhone.setText("");
+                    tfAddress.setText("");
                 } else {
                     JOptionPane.showMessageDialog(ProgramistaPanel, "Nie udało się dodać programisty do bazy danych.", "Błąd", JOptionPane.ERROR_MESSAGE);
                 }

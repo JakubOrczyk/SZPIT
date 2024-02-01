@@ -6,13 +6,13 @@ import java.util.List;
 public class Programista extends Osoba{
 
     private String skills;
-    private int tasks;
+    private int idZespolu;
     private List<Zadanie> przypisaneZadania;
 
-    public Programista(String name, String surname, String email, String phone, String address, String skills, int tasks) {
+    public Programista(String name, String surname, String email, String phone, String address, String skills,int idZespolu) {
         super(name, surname, email, phone, address);
         this.skills = skills;
-        this.tasks = tasks;
+        this.idZespolu = idZespolu;
     }
 
     public String getSkills() {
@@ -24,11 +24,11 @@ public class Programista extends Osoba{
     }
 
     public int getTasks() {
-        return tasks;
+        return idZespolu;
     }
 
-    public void setTasks(int tasks) {
-        this.tasks = tasks;
+    public void setTasks(int idZespolu) {
+        this.idZespolu = idZespolu;
     }
 
     public List<Zadanie> getPrzypisaneZadania() {

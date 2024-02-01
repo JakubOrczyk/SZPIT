@@ -62,7 +62,7 @@ public class LoginForm extends JDialog  {
                 dispose();
                 RegistrationForm registrationForm = new RegistrationForm(parentFrame);
                 registrationForm.setVisible(true);
-                dispose();
+
             }
         });
         setVisible(true);

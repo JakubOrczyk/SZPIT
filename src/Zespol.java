@@ -6,6 +6,7 @@ public class Zespol {
     private String liderName;
     private int iloscProgramistow;
     private List<Programista> czlonkowie;
+    private int idZespolu;
 
     public Zespol(String nazwa, String liderName, int iloscProgramistow) {
         this.nazwa = nazwa;
@@ -48,5 +49,13 @@ public class Zespol {
 
     public void dodajProgramiste(Programista programista) {
         this.czlonkowie.add(programista);
+    }
+
+    public void setIDzespolu(int zespolID) {
+        this.idZespolu = zespolID;
+    }
+
+    public int getIDzespolu() {
+        return idZespolu;
     }
 }

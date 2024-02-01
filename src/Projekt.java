@@ -6,6 +6,8 @@ import java.util.List;
 
 public class Projekt {
     private String nazwa;
+
+    private int idProjektu;
     private String opis;
     private Date dataRozpoczecia;
     private Date dataZakonczenia;
@@ -148,5 +150,13 @@ public class Projekt {
     // Metoda zwracająca status projektu
     public String getStatus() {
         return status;
+    }
+
+    public void setID(int projectID) {
+        this.idProjektu = projectID;
+    }
+
+    public int getProjectID() {
+        return idProjektu;
     }
 }
