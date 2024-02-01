@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="ProgramistaPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="50" left="20" bottom="0" right="20"/>
     <constraints>
-      <xy x="20" y="20" width="1042" height="400"/>
+      <xy x="20" y="20" width="1211" height="400"/>
     </constraints>
     <properties>
       <background color="-15572848"/>
@@ -20,7 +20,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <grid id="8d69a" layout-manager="GridLayoutManager" row-count="2" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="8d69a" layout-manager="GridLayoutManager" row-count="2" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="20" bottom="0" right="20"/>
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -130,6 +130,26 @@
                 <properties>
                   <font name="Apple SD Gothic Neo"/>
                   <text value="Telefon"/>
+                </properties>
+              </component>
+              <component id="48706" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+                <constraints>
+                  <grid row="1" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <model>
+                    <item value="Programista"/>
+                    <item value="Tester"/>
+                  </model>
+                </properties>
+              </component>
+              <component id="5edab" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Apple SD Gothic Neo"/>
+                  <text value="Stanowisko"/>
                 </properties>
               </component>
             </children>

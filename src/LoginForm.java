@@ -24,8 +24,6 @@ public class LoginForm extends JDialog  {
         setModal(true);
         setLocationRelativeTo(parent);
 
-
-
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -100,20 +98,4 @@ public class LoginForm extends JDialog  {
         }
         return user;
     }
-
-//    public static void main(String[] args) {
-//        LoginForm loginForm = new LoginForm(null);
-//        User user = loginForm.user;
-//
-//        if(user != null){
-//            System.out.println("Successful  Authentication of "+ user.getName());
-//            System.out.println("\t\tEmail: "+ user.getEmail());
-//            System.out.println("\t\tPhone: "+ user.getPhone());
-//            System.out.println("\t\tAddress: "+ user.getAddress());
-//        }else{
-//            System.out.println("Authentication canceled");
-//        }
-//
-//    }
-
 }

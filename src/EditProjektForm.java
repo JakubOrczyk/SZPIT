@@ -42,11 +42,11 @@ public class EditProjektForm extends JFrame{
         spDataRoz.setValue(selectedProject.getDataRozpoczecia());
         spDataZak.setValue(selectedProject.getDataZakonczenia());
 
-        // Sprawdzenie czy data nie jest null, jeśli jest, ustaw datę na bieżącą
+
         Date dataRozpoczecia = selectedProject.getDataRozpoczecia() != null ? selectedProject.getDataRozpoczecia() : new Date();
         Date dataZakonczenia = selectedProject.getDataZakonczenia() != null ? selectedProject.getDataZakonczenia() : new Date();
 
-// Ustawienie modelu dla JSpinner z wartościami dat
+
         spDataRoz.setModel(new SpinnerDateModel(dataRozpoczecia, null, null, Calendar.DAY_OF_MONTH));
         spDataZak.setModel(new SpinnerDateModel(dataZakonczenia, null, null, Calendar.DAY_OF_MONTH));
 
@@ -69,14 +69,14 @@ public class EditProjektForm extends JFrame{
         btnEdit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Aktualizacja danych obiektu selectedProject na podstawie wprowadzonych danych w polach tekstowych i spinnerach
+
                 selectedProject.setNazwa(tfName.getText());
                 selectedProject.setOpis(tfOpis.getText());
                 selectedProject.setStatus(tfStatus.getText());
                 selectedProject.setDataRozpoczecia((Date) spDataRoz.getValue());
                 selectedProject.setDataZakonczenia((Date) spDataZak.getValue());
 
-                // Zapisanie zmienionego obiektu do bazy danych
+
                 final String DB_URL = "jdbc:mysql://localhost/SZPIT?serverTimezone=UTC";
                 final String USERNAME = "root";
                 final String PASSWORD = "";

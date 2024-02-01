@@ -9,16 +9,14 @@ import java.util.ArrayList;
 public class PodgladProjektuForm extends JFrame{
     private JPanel podgladProjektuPanel;
     private JButton btnBack;
-
     private JTable zespolTable;
     private JTable ProgramistaTable;
     private JTable projektTable;
     private User loggedInUser;
+    private JFrame parentFrame;
     DefaultTableModel tableModel;
     DefaultTableModel tableModel2;
     DefaultTableModel tableModel3;
-    private JFrame parentFrame;
-
     java.util.List<Projekt> projects = new ArrayList<Projekt>();
     java.util.List<Programista> programisci = new ArrayList<Programista>();
     java.util.List<Zespol> zespoly = new ArrayList<Zespol>();
@@ -33,7 +31,6 @@ public PodgladProjektuForm(Projekt selectedProject, User loggedInUser, JFrame pa
     setTitle("System zarządzania projektami IT - Podgląd Projektu");
 
     int IDuser = loggedInUser.getUserID();
-    // Inicjalizacja JTable z pustym modelem
             tableModel = new DefaultTableModel();
             projektTable.setModel(tableModel);
     tableModel2 = new DefaultTableModel();
@@ -41,7 +38,6 @@ public PodgladProjektuForm(Projekt selectedProject, User loggedInUser, JFrame pa
     tableModel3 = new DefaultTableModel();
     ProgramistaTable.setModel(tableModel3);
 
-    // Dodanie kolumn do modelu
     tableModel.addColumn("Nazwa");
     tableModel.addColumn("Opis");
     tableModel.addColumn("Status");
@@ -60,16 +56,13 @@ public PodgladProjektuForm(Projekt selectedProject, User loggedInUser, JFrame pa
     tableModel3.addColumn("Telefon");
     tableModel3.addColumn("Adres");
 
-
         int projektID = selectedProject.getProjectID();
-    // Pobranie danych z bazy i wyświetlenie w panelu scrollowalnym
     final String DB_URL = "jdbc:mysql://localhost/SZPIT?serverTimezone=UTC";
     final String USERNAME = "root";
     final String PASSWORD = "";
     int loggedInUserID = loggedInUser.getUserID();
     String query = "SELECT * FROM Projekt WHERE UserID = " + loggedInUserID + " AND ProjektID = " + selectedProject.getProjectID();
     String query1 = "SELECT * FROM Klient JOIN Projekt ON Projekt.IDklienta = Klient.KlientID";
-
 
     try{
         Connection connection = DriverManager.getConnection(DB_URL,USERNAME,PASSWORD);
@@ -97,13 +90,9 @@ public PodgladProjektuForm(Projekt selectedProject, User loggedInUser, JFrame pa
             } else {
                 Klient = "BRAK";
             }
-            // Tworzenie obiektu klasy Projekt
             Projekt projekt = new Projekt(name, description, dataR, dataZ);
             projekt.setStatus(status);
-
             projects.add(projekt);
-
-            // Dodanie danych do modelu
             tableModel.addRow(new Object[]{projekt.getNazwa(), projekt.getOpis(), projekt.getStatus(), projekt.getDataRozpoczecia(), projekt.getDataZakonczenia(), Klient});
         }
 
@@ -115,12 +104,7 @@ public PodgladProjektuForm(Projekt selectedProject, User loggedInUser, JFrame pa
         e.printStackTrace();
     }
 
-    String query2 = "SELECT * FROM Programista " +
-            "WHERE UserID = " + IDuser +
-            " AND IDzespolu = (SELECT ZespolID FROM Zespol WHERE ZespolID = (SELECT ZespolID FROM Projekt WHERE ProjektID = " + selectedProject.getProjectID() + "))";
-
-
-
+    String query2 = "SELECT * FROM Programista " + "WHERE UserID = " + IDuser + " AND IDzespolu = (SELECT ZespolID FROM Zespol WHERE ZespolID = (SELECT ZespolID FROM Projekt WHERE ProjektID = " + selectedProject.getProjectID() + "))";
 
     try{
         Connection connection = DriverManager.getConnection(DB_URL,USERNAME,PASSWORD);
@@ -137,14 +121,11 @@ public PodgladProjektuForm(Projekt selectedProject, User loggedInUser, JFrame pa
             String phone = resultSet.getString("Phone");
             String address = resultSet.getString("Address");
             String skilss = resultSet.getString("Skills");
-
-            // Tworzenie obiektu klasy Projekt
-            Programista programista = new Programista(name,surname,email,phone,address,skilss,0);
-
+            int idZespolu = resultSet.getInt("IDzespolu");
+            Programista programista = new Programista(name, surname, email,phone,address,progID,"Programista",2000,skilss, idZespolu);
 
             programisci.add(programista);
 
-            // Dodanie danych do modelu
             tableModel3.addRow(new Object[]{programista.getName(), programista.getSurname(), programista.getEmail(), programista.getSkills(), programista.getPhone(), programista.getAddress()});
         }
 
@@ -155,18 +136,12 @@ public PodgladProjektuForm(Projekt selectedProject, User loggedInUser, JFrame pa
     } catch (SQLException e) {
         e.printStackTrace();
     }
-    String query3 = "SELECT * FROM Zespol " +
-            "WHERE UserID = " + loggedInUserID +
-            " AND ZespolID = (SELECT ZespolID FROM Projekt WHERE ProjektID = " + selectedProject.getProjectID() + ")";
-
-
-
+    String query3 = "SELECT * FROM Zespol " + "WHERE UserID = " + loggedInUserID + " AND ZespolID = (SELECT ZespolID FROM Projekt WHERE ProjektID = " + selectedProject.getProjectID() + ")";
 
     try{
         Connection connection = DriverManager.getConnection(DB_URL,USERNAME,PASSWORD);
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(query3);
-
 
         while (resultSet.next()) {
 
@@ -174,22 +149,13 @@ public PodgladProjektuForm(Projekt selectedProject, User loggedInUser, JFrame pa
             String name = resultSet.getString("Nazwa");
             String lider = resultSet.getString("LiderName");
             int ilosc = resultSet.getInt("IloscProgramistow");
-
-
-            // Tworzenie obiektu klasy Projekt
             Zespol zespol = new Zespol(name, lider, ilosc);
-
-
             zespoly.add(zespol);
-
-            // Dodanie danych do modelu
             tableModel2.addRow(new Object[]{zespol.getNazwa(), zespol.getLiderName(), zespol.getIloscProgramistow()});
         }
-
         resultSet.close();
         statement.close();
         connection.close();
-
     } catch (SQLException e) {
         e.printStackTrace();
     }
@@ -201,6 +167,5 @@ public PodgladProjektuForm(Projekt selectedProject, User loggedInUser, JFrame pa
             dashboardForm.setVisible(true);
         }
     });
-
 }
 }

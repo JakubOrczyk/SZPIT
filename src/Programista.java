@@ -3,14 +3,14 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Programista extends Osoba{
+public class Programista extends Pracownik{
 
     private String skills;
     private int idZespolu;
     private List<Zadanie> przypisaneZadania;
 
-    public Programista(String name, String surname, String email, String phone, String address, String skills,int idZespolu) {
-        super(name, surname, email, phone, address);
+    public Programista(String name, String surname, String email, String phone, String address, int idPracownika, String stanowisko, double pensja, String skills, int idZespolu) {
+        super(name, surname, email, phone, address, idPracownika, stanowisko, pensja);
         this.skills = skills;
         this.idZespolu = idZespolu;
     }
@@ -35,11 +35,4 @@ public class Programista extends Osoba{
         return przypisaneZadania;
     }
 
-    public void setPrzypisaneZadania(List<Zadanie> przypisaneZadania) {
-        this.przypisaneZadania = przypisaneZadania;
-    }
-
-    public void addZadanie(Zadanie zadanie) {
-        this.przypisaneZadania.add(zadanie);
-    }
 }

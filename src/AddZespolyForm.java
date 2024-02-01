@@ -18,10 +18,10 @@ public class AddZespolyForm extends JFrame{
     private JButton przypiszProgramisteButton;
     private JButton wróćButton;
     private JButton btnDelete;
-    DefaultTableModel tableModel;
-    java.util.List<Zespol> zespuls = new ArrayList<Zespol>();
     private JFrame parentFrame;
     private User loggedInUser;
+    DefaultTableModel tableModel;
+    java.util.List<Zespol> zespuls = new ArrayList<Zespol>();
 public AddZespolyForm(User loggedInUser, JFrame parent) {
     this.loggedInUser = loggedInUser;
     this.parentFrame = parent;
@@ -32,36 +32,29 @@ public AddZespolyForm(User loggedInUser, JFrame parent) {
     setLocationRelativeTo(parent);
     setTitle("System zarządzania projektami IT - Zespoły");
 
-    // Inicjalizacja JTable z pustym modelem
     tableModel = new DefaultTableModel();
     zespolyTable.setModel(tableModel);
 
-    // Dodanie kolumn do modelu
     tableModel.addColumn("ID");
     tableModel.addColumn("Nazwa");
     tableModel.addColumn("Rodzaj");
     tableModel.addColumn("IlośćProgramistów");
 
-    // Pobranie danych z bazy i wyświetlenie w panelu scrollowalnym
     final String DB_URL = "jdbc:mysql://localhost/SZPIT?serverTimezone=UTC";
     final String USERNAME = "root";
     final String PASSWORD = "";
-
     String query = "SELECT * FROM Zespol WHERE UserID = " + loggedInUser.getUserID();
-
 
     try{
         Connection connection = DriverManager.getConnection(DB_URL,USERNAME,PASSWORD);
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(query);
-
         while (resultSet.next()) {
             int zespolID = resultSet.getInt("ZespolID");
             String nazwa = resultSet.getString("Nazwa");
             String liderName = resultSet.getString("LiderName");
             int iloscProgramistow = resultSet.getInt("IloscProgramistow");
             String query2 = "SELECT COUNT(*) AS RecordCount FROM Programista WHERE IDzespolu = "+zespolID;
-
             int liczba = 0;
             try {
                 Statement statementt = connection.createStatement();
@@ -74,20 +67,14 @@ public AddZespolyForm(User loggedInUser, JFrame parent) {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-            Zespol zespol = new Zespol(nazwa, liderName, iloscProgramistow);
+            Zespol zespol = new Zespol(nazwa, liderName, liczba);
             zespol.setIDzespolu(zespolID);
-
             zespuls.add(zespol);
-
-
             tableModel.addRow(new Object[]{zespolID, zespol.getNazwa(), zespol.getLiderName(), zespol.getIloscProgramistow()});
         }
-
         resultSet.close();
         statement.close();
         connection.close();
-
     } catch (SQLException e) {
         e.printStackTrace();
     }
@@ -102,20 +89,14 @@ public AddZespolyForm(User loggedInUser, JFrame parent) {
     przypiszProgramisteButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Sprawdzenie czy został zaznaczony wiersz w tabeli
+
             int selectedRow = zespolyTable.getSelectedRow();
-            if (selectedRow != -1) { // -1 oznacza brak zaznaczenia
-                // Pobranie ID zaznaczonego zespołu z modelu tabeli
-                int selectedZespolID = (int) tableModel.getValueAt(selectedRow, 0); // Zakładam, że ID zespołu znajduje się w pierwszej kolumnie tabeli
-
-                // Zamknięcie bieżącego okna
+            if (selectedRow != -1) {
+                int selectedZespolID = (int) tableModel.getValueAt(selectedRow, 0);
                 dispose();
-
-                // Przekazanie ID zespołu do nowego okna i otwarcie go
                 PrzypiszProgramisteForm przypiszProgramisteForm = new PrzypiszProgramisteForm(loggedInUser, selectedZespolID, parentFrame);
                 przypiszProgramisteForm.setVisible(true);
             } else {
-                // Wyświetlenie komunikatu o konieczności wyboru zespołu
                 JOptionPane.showMessageDialog(AddZespolyForm.this, "Wybierz zespół, aby kontynuować.", "Błąd", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -123,20 +104,12 @@ public AddZespolyForm(User loggedInUser, JFrame parent) {
     btnAdd.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Pobieranie wartości z pól tekstowych
             String nazwa = tfName.getText();
             String rodzaj = tfRodzaj.getText();
-
-            // Tworzenie nowego obiektu zespołu
             Zespol newZespol = new Zespol(nazwa, rodzaj, 0);
-
-            // Dodanie zespołu do listy
             zespuls.add(newZespol);
 
-            // Dodanie zespołu do tabeli i bazy danych
             try (Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD)) {
-
-                // Wstawianie nowego zespołu do bazy danych
                 String insertQuery = "INSERT INTO Zespol (Nazwa, LiderName, IloscProgramistow, UserID) VALUES (?, ?, ?, ?)";
                 PreparedStatement insertStatement = conn.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
                 insertStatement.setString(1, newZespol.getNazwa());
@@ -144,17 +117,12 @@ public AddZespolyForm(User loggedInUser, JFrame parent) {
                 insertStatement.setInt(3, 0);
                 insertStatement.setInt(4, loggedInUser.getUserID());
                 insertStatement.executeUpdate();
-
-                // Pobranie automatycznie generowanego ID dla nowego zespołu
                 ResultSet generatedKeys = insertStatement.getGeneratedKeys();
                 if (generatedKeys.next()) {
                     int zespolID = generatedKeys.getInt(1);
                     newZespol.setIDzespolu(zespolID);
-                    // Aktualizacja wiersza w tabeli
                     tableModel.addRow(new Object[]{zespolID, newZespol.getNazwa(), newZespol.getLiderName(), 0});
                 }
-
-                // Zamykanie zasobów
                 generatedKeys.close();
                 insertStatement.close();
             } catch (SQLException ex) {
@@ -167,21 +135,14 @@ public AddZespolyForm(User loggedInUser, JFrame parent) {
     btnDelete.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Sprawdzenie czy został zaznaczony wiersz w tabeli
             int selectedRow = zespolyTable.getSelectedRow();
-            if (selectedRow != -1) { // -1 oznacza brak zaznaczenia
-                // Pobranie ID zaznaczonego zespołu z modelu tabeli
-                int selectedZespolID = (int) tableModel.getValueAt(selectedRow, 0); // Zakładam, że ID zespołu znajduje się w pierwszej kolumnie tabeli
-
-                // Usunięcie zespołu z bazy danych
+            if (selectedRow != -1) {
+                int selectedZespolID = (int) tableModel.getValueAt(selectedRow, 0);
                 try (Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD)) {
-                    // Usunięcie zespołu na podstawie jego ID
                     String deleteQuery = "DELETE FROM Zespol WHERE ZespolID = ?";
                     PreparedStatement deleteStatement = conn.prepareStatement(deleteQuery);
                     deleteStatement.setInt(1, selectedZespolID);
                     int rowsAffected = deleteStatement.executeUpdate();
-
-                    // Usunięcie wiersza zespołu z modelu tabeli, jeśli operacja usuwania z bazy danych powiodła się
                     if (rowsAffected > 0) {
                         tableModel.removeRow(selectedRow);
                         JOptionPane.showMessageDialog(AddZespolyForm.this, "Zespół został pomyślnie usunięty.", "Sukces", JOptionPane.INFORMATION_MESSAGE);
@@ -193,11 +154,9 @@ public AddZespolyForm(User loggedInUser, JFrame parent) {
                     JOptionPane.showMessageDialog(AddZespolyForm.this, "Wystąpił błąd podczas usuwania zespołu.", "Błąd", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                // Wyświetlenie komunikatu o konieczności wyboru zespołu
                 JOptionPane.showMessageDialog(AddZespolyForm.this, "Wybierz zespół do usunięcia.", "Błąd", JOptionPane.ERROR_MESSAGE);
             }
         }
     });
-
 }
 }

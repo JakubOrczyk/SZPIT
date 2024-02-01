@@ -30,11 +30,11 @@ public class AddZespolProjektForm extends JDialog{
         setModal(true);
         setLocationRelativeTo(parent);
 
-        // Inicjalizacja JTable z pustym modelem
+
         tableModel = new DefaultTableModel();
         zespulTable.setModel(tableModel);
 
-        // Dodanie kolumn do modelu
+
         tableModel.addColumn("ID");
         tableModel.addColumn("Nazwa");
         tableModel.addColumn("Rodzaj");

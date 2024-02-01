@@ -23,10 +23,8 @@ public class DashboardForm extends JFrame{
     private JButton btnZespoly;
     private JButton btnProg;
     private User loggedInUser;
-
-    List<Projekt> projects = new ArrayList<Projekt>();
-
     private JFrame parentFrame;
+    List<Projekt> projects = new ArrayList<Projekt>();
     DefaultTableModel tableModel;
     public DashboardForm(User loggedInUser, JFrame parent) {
         super("System zarządzania projektami IT");
@@ -38,17 +36,14 @@ public class DashboardForm extends JFrame{
         setMinimumSize(new Dimension(width,height));
         setLocationRelativeTo(parent);
 
-// Inicjalizacja JTable z pustym modelem
         tableModel = new DefaultTableModel();
         ClientsTable.setModel(tableModel);
 
-        // Dodanie kolumn do modelu
         tableModel.addColumn("ID");
         tableModel.addColumn("Nazwa");
         tableModel.addColumn("Opis");
         tableModel.addColumn("Status");
 
-        // Pobranie danych z bazy i wyświetlenie w panelu scrollowalnym
         final String DB_URL = "jdbc:mysql://localhost/SZPIT?serverTimezone=UTC";
         final String USERNAME = "root";
         final String PASSWORD = "";
@@ -68,13 +63,10 @@ public class DashboardForm extends JFrame{
                 Date dataR = resultSet.getDate("DataRozpoczecia");
                 Date dataZ = resultSet.getDate("DataZakonczenia");
 
-                // Tworzenie obiektu klasy Projekt
                 Projekt projekt = new Projekt(name, description, dataR, dataZ);
                 projekt.setStatus(status);
-
                 projects.add(projekt);
 
-                // Dodanie danych do modelu
                 tableModel.addRow(new Object[]{projectID, projekt.getNazwa(), projekt.getOpis(), projekt.getStatus()});
             }
 
@@ -99,25 +91,22 @@ public class DashboardForm extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                DodajProjektForm dodajProjektForm = new DodajProjektForm(loggedInUser, projects, parentFrame); // Otwórz nowy formularz "DodajProjektForm"
+                DodajProjektForm dodajProjektForm = new DodajProjektForm(loggedInUser, projects, parentFrame);
                 dodajProjektForm.setVisible(true);
             }
         });
         btnEdit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Sprawdź, czy wybrano wiersz w tabeli
                 int selectedRow = ClientsTable.getSelectedRow();
                 if (selectedRow == -1) {
                     JOptionPane.showMessageDialog(null, "Wybierz projekt do edycji.", "Błąd", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 int projectID = (int) ClientsTable.getValueAt(selectedRow, 0);
-                // Pobierz nazwę i opis wybranego projektu z tabeli
                 String projectName = (String) ClientsTable.getValueAt(selectedRow, 1);
                 String projectDescription = (String) ClientsTable.getValueAt(selectedRow, 2);
 
-                // Znajdź wybrany projekt w liście projects na podstawie nazwy i opisu
                 Projekt selectedProject = null;
                 for (Projekt project : projects) {
                     if (project.getNazwa().equals(projectName) && project.getOpis().equals(projectDescription)) {
@@ -131,7 +120,6 @@ public class DashboardForm extends JFrame{
                     return;
                 }
 
-                // Otwórz formularz edycji projektu i przekaż wybrany projekt jako argument konstruktora
                 dispose();
                 EditProjektForm editProjektForm = new EditProjektForm(selectedProject, loggedInUser,parentFrame);
                 editProjektForm.setVisible(true);
@@ -140,17 +128,14 @@ public class DashboardForm extends JFrame{
         btnDelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Sprawdź, czy wybrano wiersz w tabeli
                 int selectedRow = ClientsTable.getSelectedRow();
                 if (selectedRow == -1) {
                     JOptionPane.showMessageDialog(null, "Wybierz projekt do usunięcia.", "Błąd", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
-                // Pobierz ID wybranego projektu z tabeli
                 int projectID = (int) ClientsTable.getValueAt(selectedRow, 0);
 
-                // Usuń projekt z bazy danych
                 final String DB_URL = "jdbc:mysql://localhost/SZPIT?serverTimezone=UTC";
                 final String USERNAME = "root";
                 final String PASSWORD = "";
@@ -161,10 +146,8 @@ public class DashboardForm extends JFrame{
                     int rowsAffected = statement.executeUpdate();
 
                     if (rowsAffected > 0) {
-                        // Usunięto projekt z bazy danych, więc usuń także wiersz z tabeli
                         tableModel.removeRow(selectedRow);
                         JOptionPane.showMessageDialog(null, "Projekt został pomyślnie usunięty.", "Sukces", JOptionPane.INFORMATION_MESSAGE);
-
                     } else {
                         JOptionPane.showMessageDialog(null, "Nie udało się usunąć projektu.", "Błąd", JOptionPane.ERROR_MESSAGE);
                     }
@@ -178,18 +161,15 @@ public class DashboardForm extends JFrame{
         btnPodglad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Sprawdź, czy wybrano wiersz w tabeli
                 int selectedRow = ClientsTable.getSelectedRow();
                 if (selectedRow == -1) {
                     JOptionPane.showMessageDialog(null, "Wybierz projekt do podglądu.", "Błąd", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 int projectID = (int) ClientsTable.getValueAt(selectedRow, 0);
-                // Pobierz nazwę i opis wybranego projektu z tabeli
                 String projectName = (String) ClientsTable.getValueAt(selectedRow, 1);
                 String projectDescription = (String) ClientsTable.getValueAt(selectedRow, 2);
 
-                // Znajdź wybrany projekt w liście projects na podstawie nazwy i opisu
                 Projekt selectedProject = null;
                 for (Projekt project : projects) {
                     if (project.getNazwa().equals(projectName) && project.getOpis().equals(projectDescription)) {
@@ -202,8 +182,6 @@ public class DashboardForm extends JFrame{
                     JOptionPane.showMessageDialog(null, "Nie można znaleźć wybranego projektu.", "Błąd", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-
-                // Otwórz formularz edycji projektu i przekaż wybrany projekt jako argument konstruktora
                 dispose();
                 PodgladProjektuForm podgladProjektuForm = new PodgladProjektuForm(selectedProject, loggedInUser, parentFrame);
                 podgladProjektuForm.setVisible(true);
@@ -213,7 +191,7 @@ public class DashboardForm extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                AddZespolyForm addZespolyForm = new AddZespolyForm(loggedInUser, parentFrame); // Otwórz nowy formularz "DodajProjektForm"
+                AddZespolyForm addZespolyForm = new AddZespolyForm(loggedInUser, parentFrame);
                 addZespolyForm.setVisible(true);
             }
         });
@@ -221,7 +199,7 @@ public class DashboardForm extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                ProgramisciForm programisciForm = new ProgramisciForm(loggedInUser, parentFrame); // Otwórz nowy formularz "DodajProjektForm"
+                ProgramisciForm programisciForm = new ProgramisciForm(loggedInUser, parentFrame);
                 programisciForm.setVisible(true);
             }
         });

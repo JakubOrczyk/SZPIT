@@ -51,7 +51,7 @@ public RegistrationForm(JFrame parent) {
                         JOptionPane.ERROR_MESSAGE);
                 return;
             }
-// Walidacja adresu e-mail
+
             if (!isValidEmail(email)) {
                 JOptionPane.showMessageDialog(RegistrationPanel,
                         "Niepoprawny adres e-mail!",
@@ -59,7 +59,7 @@ public RegistrationForm(JFrame parent) {
                         JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            // Walidacja hasła
+
             if (!isValidPassword(password)) {
                 JOptionPane.showMessageDialog(RegistrationPanel,
                         "Niepoprawne hasło!\n Hasło musi zawierać:\n 1 dużą literę,\n 1 cyfrę,\n 1 znak specjalny,\n i mieć długość co najmniej 6 znaków.",
@@ -73,8 +73,6 @@ public RegistrationForm(JFrame parent) {
                         "Pomyślnie zarejestrowano nowego użytkownika!",
                         "Sukces",
                         JOptionPane.INFORMATION_MESSAGE);
-
-                // Logowanie nowo zarejestrowanego użytkownika
                 dispose();
                 LoginForm loginForm = new LoginForm(null);
                 loginForm.setVisible(true);
@@ -86,17 +84,11 @@ public RegistrationForm(JFrame parent) {
             }
         }
         private boolean isValidEmail(String email) {
-            // Wzorzec do sprawdzania adresu e-mail
             String emailPattern = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-
-            // Sprawdzenie, czy adres e-mail pasuje do wzorca
             return email.matches(emailPattern);
         }
         private boolean isValidPassword(String password) {
-            // Wzorzec do sprawdzania hasła
             String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$";
-
-            // Sprawdzenie, czy hasło pasuje do wzorca
             return password.matches(passwordPattern);
         }
     });
@@ -106,7 +98,6 @@ public RegistrationForm(JFrame parent) {
         final String DB_URL = "jdbc:mysql://localhost/SZPIT?serverTimezone=UTC";
         final String USERNAME = "root";
         final String PASSWORD = "";
-
         try{
             Connection conn = DriverManager.getConnection(DB_URL,USERNAME,PASSWORD);
             String sql = "INSERT INTO User (login, name, email, password) VALUES (?, ?, ?, ?)";

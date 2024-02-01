@@ -30,27 +30,6 @@ public class Projekt {
         this.zespol = zespol;
     }
 
-    public void dodajZadanie(Zadanie zadanie) {
-        this.zadania.add(zadanie);
-    }
-    public void usunZadanie(Zadanie zadanie) {
-        this.zadania.remove(zadanie);
-    }
-
-    public void dodajProgramisteDoZadania(Programista programista, Zadanie zadanie) {
-        zadanie.setPrzypisanyProgramista(programista);
-    }
-
-    public void usunProgramisteZadania(Programista programista, Zadanie zadanie) {
-        zadanie.usunProgramiste(programista);
-    }
-    public void wyswietlZadania() {
-        System.out.println("Zadania w projekcie " + nazwa + ":");
-        for (Zadanie zadanie : zadania) {
-            System.out.println("- " + zadanie.getOpis());
-        }
-    }
-
     public void wyswietlProgramistow() {
         System.out.println("Programiści przypisani do projektu " + nazwa + ":");
         if (przypisanyProgramista != null) {
@@ -64,34 +43,6 @@ public class Projekt {
                 System.out.println("- " + programista.getName() + " " + programista.getSurname() + " (zadanie: " + zadanie.getOpis() + ")");
             }
         }
-    }
-    public void usunProgramisteZadania(String imie, String nazwisko) {
-        // Iterujemy przez listę zadań w poszukiwaniu danego programisty
-        for (Zadanie zadanie : this.zadania) {
-            Programista programista = zadanie.getPrzypisanyProgramista();
-            if (programista != null && programista.getName().equals(imie) && programista.getSurname().equals(nazwisko)) {
-                zadanie.setPrzypisanyProgramista(null); // Usunięcie programisty z zadania
-                System.out.println("Usunięto programistę " + imie + " " + nazwisko + " z zadania.");
-                return; // Przerwij pętlę, gdy programista zostanie usunięty
-            }
-        }
-        // Komunikat jeśli programista nie był przypisany do żadnego zadania w projekcie
-        System.out.println("Podany programista nie jest przypisany do żadnego zadania w tym projekcie.");
-    }
-    public void dodajProgramisteDoZadania(Programista programista) {
-        // Przyjmujemy, że istnieje metoda dodająca nowe zadanie do projektu, np. dodajZadanie(Zadanie zadanie)
-        // W tej metodzie będziemy dodawać nowe zadanie i przypisywać do niego programistę
-
-        // Tworzymy nowe zadanie
-        Zadanie noweZadanie = new Zadanie("Nowe zadanie", this); // Załóżmy, że nazwa zadania to "Nowe zadanie"
-
-        // Przypisujemy programistę do nowego zadania
-        noweZadanie.setPrzypisanyProgramista(programista);
-
-        // Dodajemy nowe zadanie do listy zadań projektu
-        this.dodajZadanie(noweZadanie);
-
-        System.out.println("Dodano nowe zadanie dla programisty " + programista.getName() + " " + programista.getSurname() + ".");
     }
 
     // Gettery i settery

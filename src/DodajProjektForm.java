@@ -34,7 +34,6 @@ public class DodajProjektForm extends JDialog {
         setModal(true);
         setLocationRelativeTo(parent);
 
-
         spDataRoz.setModel(new SpinnerDateModel());
         spdataZak.setModel(new SpinnerDateModel());
         btnBack.addActionListener(new ActionListener() {
@@ -48,22 +47,18 @@ public class DodajProjektForm extends JDialog {
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 String name = tfName.getText();
                 String opis = tfOpis.getText();
                 String status = tfStatus.getText();
                 int UserID = loggedInUser.getUserID();
-                // Pobranie dat z spinnerów
                 Date dataRozpoczecia = (Date) spDataRoz.getValue();
                 Date dataZakonczenia = (Date) spdataZak.getValue();
 
-                // Sprawdzenie czy pola nie są puste
                 if (name.isEmpty() || opis.isEmpty() || status.isEmpty()) {
                     JOptionPane.showMessageDialog(DodajProjektForm.this, "Wszystkie pola są wymagane!", "Błąd", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
-                // Dodanie projektu do bazy danych
                 final String DB_URL = "jdbc:mysql://localhost/SZPIT?serverTimezone=UTC";
                 final String USERNAME = "root";
                 final String PASSWORD = "";
@@ -81,11 +76,9 @@ public class DodajProjektForm extends JDialog {
                     int rowsInserted = preparedStatement.executeUpdate();
                     if (rowsInserted > 0) {
                         JOptionPane.showMessageDialog(DodajProjektForm.this, "Projekt został pomyślnie dodany.", "Sukces", JOptionPane.INFORMATION_MESSAGE);
-                        // Stwórz obiekt projektu na podstawie wprowadzonych danych
                         Projekt nowyProjekt = new Projekt(name, opis, dataRozpoczecia, dataZakonczenia);
                         nowyProjekt.setStatus(status);
 
-                        // Dodaj nowy projekt do listy projects
                         projects.add(nowyProjekt);
                     } else {
                         JOptionPane.showMessageDialog(DodajProjektForm.this, "Nie udało się dodać projektu.", "Błąd", JOptionPane.ERROR_MESSAGE);

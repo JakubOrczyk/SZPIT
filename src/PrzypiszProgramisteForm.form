@@ -73,7 +73,7 @@
                 <properties>
                   <font name="Apple SD Gothic Neo" size="18" style="1"/>
                   <foreground color="-1"/>
-                  <text value="Programisci w zespole"/>
+                  <text value="Pracownicy w zespole"/>
                 </properties>
               </component>
               <scrollpane id="7544f">
@@ -115,7 +115,7 @@
                 <properties>
                   <font name="Apple SD Gothic Neo" size="18" style="1"/>
                   <foreground color="-1"/>
-                  <text value="Dostępni Programisci"/>
+                  <text value="Dostępni Pracownicy"/>
                 </properties>
               </component>
               <scrollpane id="8ceed">
