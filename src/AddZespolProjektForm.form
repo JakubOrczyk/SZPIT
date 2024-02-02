@@ -68,7 +68,7 @@
                 </constraints>
                 <properties>
                   <font name="Apple SD Gothic Neo"/>
-                  <text value="Przypisz zespuł"/>
+                  <text value="Przypisz zespół"/>
                 </properties>
               </component>
               <component id="5dab8" class="javax.swing.JButton" binding="btnBack">

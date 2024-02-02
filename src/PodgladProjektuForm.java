@@ -79,7 +79,7 @@ public PodgladProjektuForm(Projekt selectedProject, User loggedInUser, JFrame pa
             String status = resultSet.getString("Status");
             Date dataR = resultSet.getDate("DataRozpoczecia");
             Date dataZ = resultSet.getDate("DataZakonczenia");
-            if (resultSet.next()) {
+            if (resultSett.next()) {
                 String nameK = resultSett.getString("Name");
                 String surnameK = resultSett.getString("Surname");
                 String email = resultSett.getString("Email");

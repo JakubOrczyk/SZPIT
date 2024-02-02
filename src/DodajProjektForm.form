@@ -61,6 +61,8 @@
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="10" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Apple SD Gothic Neo"/>
+              <foreground color="-1"/>
               <text value="Status"/>
             </properties>
           </component>
@@ -69,6 +71,8 @@
               <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="10" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Apple SD Gothic Neo"/>
+              <foreground color="-1"/>
               <text value="Data Rozpoczęcia"/>
             </properties>
           </component>
@@ -77,6 +81,8 @@
               <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="10" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Apple SD Gothic Neo"/>
+              <foreground color="-1"/>
               <text value="Data zakończenia"/>
             </properties>
           </component>
@@ -85,6 +91,8 @@
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="10" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Apple SD Gothic Neo"/>
+              <foreground color="-1"/>
               <text value="Opis"/>
             </properties>
           </component>
@@ -93,6 +101,8 @@
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="10" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Apple SD Gothic Neo"/>
+              <foreground color="-1"/>
               <text value="Nazwa"/>
             </properties>
           </component>

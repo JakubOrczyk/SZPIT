@@ -68,6 +68,7 @@
                 </constraints>
                 <properties>
                   <font name="Apple SD Gothic Neo"/>
+                  <foreground color="-1"/>
                   <text value="Język"/>
                 </properties>
               </component>
@@ -77,6 +78,7 @@
                 </constraints>
                 <properties>
                   <font name="Apple SD Gothic Neo"/>
+                  <foreground color="-1"/>
                   <text value="Email"/>
                 </properties>
               </component>
@@ -86,6 +88,7 @@
                 </constraints>
                 <properties>
                   <font name="Apple SD Gothic Neo"/>
+                  <foreground color="-1"/>
                   <text value="Nazwisko"/>
                 </properties>
               </component>
@@ -95,6 +98,7 @@
                 </constraints>
                 <properties>
                   <font name="Apple SD Gothic Neo"/>
+                  <foreground color="-1"/>
                   <text value="Imię"/>
                 </properties>
               </component>
@@ -120,6 +124,7 @@
                 </constraints>
                 <properties>
                   <font name="Apple SD Gothic Neo"/>
+                  <foreground color="-1"/>
                   <text value="Adres"/>
                 </properties>
               </component>
@@ -129,6 +134,7 @@
                 </constraints>
                 <properties>
                   <font name="Apple SD Gothic Neo"/>
+                  <foreground color="-1"/>
                   <text value="Telefon"/>
                 </properties>
               </component>
@@ -149,6 +155,7 @@
                 </constraints>
                 <properties>
                   <font name="Apple SD Gothic Neo"/>
+                  <foreground color="-1"/>
                   <text value="Stanowisko"/>
                 </properties>
               </component>
