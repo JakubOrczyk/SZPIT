@@ -7,7 +7,7 @@ public class Programista extends Pracownik{
 
     private String skills;
     private int idZespolu;
-    private List<Zadanie> przypisaneZadania;
+
 
     public Programista(String name, String surname, String email, String phone, String address, int idPracownika, String stanowisko, double pensja, String skills, int idZespolu) {
         super(name, surname, email, phone, address, idPracownika, stanowisko, pensja);
@@ -31,8 +31,5 @@ public class Programista extends Pracownik{
         this.idZespolu = idZespolu;
     }
 
-    public List<Zadanie> getPrzypisaneZadania() {
-        return przypisaneZadania;
-    }
 
 }

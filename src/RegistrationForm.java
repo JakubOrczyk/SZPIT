@@ -18,7 +18,7 @@ public class RegistrationForm extends JDialog{
     private JButton btnBack;
 public RegistrationForm(JFrame parent) {
     super(parent);
-    setTitle("Create a new account");
+    setTitle("Rejestracja");
     setContentPane(RegistrationPanel);
     setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     int width = 450, height = 475;

@@ -30,7 +30,7 @@ public PrzypiszProgramisteForm(User loggedInUser,int selectedZespolID, JFrame pa
     setMinimumSize(new Dimension(width,height));
     System.out.println(selectedZespolID);
     setLocationRelativeTo(parent);
-    setTitle("System zarządzania projektami IT - Przypisz Programiste");
+    setTitle("System zarządzania projektami IT - Przypisz Pracownika");
     tableModel = new DefaultTableModel();
     WszyscyTable.setModel(tableModel);
 

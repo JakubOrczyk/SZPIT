@@ -12,7 +12,7 @@ public class Projekt {
     private Date dataRozpoczecia;
     private Date dataZakonczenia;
     private String status;
-    private List<Zadanie> zadania;
+
     private Zespol zespol;
     private Programista przypisanyProgramista;
 
@@ -21,7 +21,7 @@ public class Projekt {
         this.opis = opis;
         this.dataRozpoczecia = dataRozpoczecia;
         this.dataZakonczenia = dataZakonczenia;
-        this.zadania = new ArrayList<>();
+
     }
     public void przypiszProgramiste(Programista programista) {
         this.przypisanyProgramista = programista;
@@ -36,12 +36,6 @@ public class Projekt {
             System.out.println("- " + przypisanyProgramista.getName() + " " + przypisanyProgramista.getSurname());
         } else {
             System.out.println("Brak przypisanego programisty.");
-        }
-        for (Zadanie zadanie : zadania) {
-            List<Programista> programisci = (List<Programista>) zadanie.getPrzypisanyProgramista();
-            for (Programista programista : programisci) {
-                System.out.println("- " + programista.getName() + " " + programista.getSurname() + " (zadanie: " + zadanie.getOpis() + ")");
-            }
         }
     }
 
@@ -77,27 +71,15 @@ public class Projekt {
     public void setDataZakonczenia(Date dataZakonczenia) {
         this.dataZakonczenia = dataZakonczenia;
     }
-
-    public List<Zadanie> getZadania() {
-        return zadania;
-    }
-
-    public void setZadania(List<Zadanie> zadania) {
-        this.zadania = zadania;
-    }
-
     public Zespol getZespol() {
         return zespol;
     }
-
     public void setZespol(Zespol zespol) {
         this.zespol = zespol;
     }
-
     public void setStatus(String status) {
         this.status = status;
     }
-
     // Metoda zwracająca status projektu
     public String getStatus() {
         return status;

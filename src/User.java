@@ -2,7 +2,7 @@ import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public class User implements IUser {
 
     private String login;
     private String name;

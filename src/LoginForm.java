@@ -16,7 +16,7 @@ public class LoginForm extends JDialog  {
     public LoginForm(JFrame parent) {
         super(parent);
         this.parentFrame = parent;
-        setTitle("Log in to your account");
+        setTitle("Logowanie");
         setContentPane(LoginPanel);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         int width = 450, height = 475;
